@@ -10,6 +10,7 @@
     id="dashboard-layout"
     class="dashboard"
   >
+    <navbar />
     <sidebar />
     <div class="p-4 h-full">
       <slot class="content" />
