@@ -31,7 +31,7 @@
     "tailwindcss": "^3.4.3"
   },
   "lint-staged": {
-    "src/**/*.{js,vue,html,css}": "prettier --write",
+    "**/*": "prettier ./ --write --ignore-unknown",
     "*.{js,css,md}": "prettier ./ --write"
   }
 }
