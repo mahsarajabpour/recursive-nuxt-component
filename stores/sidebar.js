@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import useHelpers from "~/composables/useHelpers.js";
 
 export const useSidebarStore = defineStore("sidebar", {
   state: () => {
@@ -18,20 +19,19 @@ export const useSidebarStore = defineStore("sidebar", {
       this.items = payload;
     },
 
-    addSpecificIndexDataToOpenItemData(item_id, data) {
+    addSpecificIndexDataToOpenItemData(item_id) {
+      const { findItemById } = useHelpers();
+      let findItemData = findItemById(this.items, item_id);
+
       this.openItemData.forEach((item) => {
         item.isOpen = false;
       });
-      this.openItemData[item_id] = { data, isOpen: true };
+      this.openItemData[item_id] = { findItemData, isOpen: true };
     },
 
     fillOpenItemData(item_id) {
       if (this.openItemData[item_id] === undefined) {
-        const data = this.items.filter(
-          (sidebarItem) =>
-            sidebarItem.id === item_id && sidebarItem.children.length > 0
-        )[0];
-        this.addSpecificIndexDataToOpenItemData(item_id, data.children);
+        this.addSpecificIndexDataToOpenItemData(item_id);
       } else {
         return this.addSpecificIndexDataToOpenItemData(
           item_id,

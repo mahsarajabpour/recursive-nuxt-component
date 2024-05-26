@@ -1,10 +1,21 @@
 <script setup>
   import { useSidebarStore } from "~/stores/sidebar";
+  import useHelpers from "~/composables/useHelpers.js";
 
   const sidebarStore = useSidebarStore();
+  const { findItemById } = useHelpers();
+
+  const infoItems = ref();
+  const dialog = ref(false);
 
   const openChild = (item_id) => {
     sidebarStore.fillOpenItemData(item_id);
+  };
+
+  const openInfo = (item_id) => {
+    dialog.value = true;
+    infoItems.value = findItemById(sidebarStore.items, item_id);
+    console.log("infoItems.value", infoItems.value);
   };
 </script>
 <template>
@@ -47,7 +58,25 @@
       >
         <li class="flex items-center justify-between border-b py-2 px-5">
           <div>
-            {{ item.title }}
+            <div class="flex items-center">
+              {{ item.title }}
+              <button @click="openInfo(item.id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-4 ml-3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                  />
+                </svg>
+              </button>
+            </div>
             <div class="text-[10px]">id: {{ item.id }}</div>
           </div>
 
@@ -81,7 +110,8 @@
             tabindex="-1"
           >
             <ul
-              v-for="childItem in sidebarStore.openItemData[item.id].data"
+              v-for="childItem in sidebarStore.openItemData[item.id].data
+                .children"
               class="list-none hover:list-disc"
             >
               <li
