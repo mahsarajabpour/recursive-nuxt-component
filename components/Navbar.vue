@@ -2,9 +2,25 @@
   import { useSidebarStore } from "~/stores/sidebar";
 
   const sidebarStore = useSidebarStore();
+  const appConfig = useAppConfig();
+
   const closeSidebar = () => {
     sidebarStore.changeStatus();
   };
+
+  const { data, pending, error } = await useFetch(
+    appConfig.endpoints.SIDEBAR_ITEMS
+  );
+
+  const afterFetch = (data) => {
+    sidebarStore.saveSidebarItems(data.value);
+  };
+
+  watchEffect(() => {
+    if (!pending.value && !error.value) {
+      afterFetch(data.value);
+    }
+  });
 </script>
 
 <template>
