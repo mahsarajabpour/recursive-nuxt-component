@@ -1,9 +1,11 @@
 <script setup>
   import { useSidebarStore } from "~/stores/sidebar";
   import useHelpers from "~/composables/useHelpers.js";
+  import CustomDialog from "~/components/CustomDialog.vue";
 
   const sidebarStore = useSidebarStore();
   const { findItemById } = useHelpers();
+  const emit = defineEmits(["update:dialog"]);
 
   const infoItems = ref();
   const dialog = ref(false);
@@ -129,6 +131,10 @@
       </ul>
     </div>
   </div>
+  <custom-dialog
+    :dialog
+    @update:dialog="(val) => (dialog = val)"
+  />
 </template>
 
 <style scoped></style>

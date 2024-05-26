@@ -26,7 +26,7 @@ export const useSidebarStore = defineStore("sidebar", {
       this.openItemData.forEach((item) => {
         item.isOpen = false;
       });
-      this.openItemData[item_id] = { findItemData, isOpen: true };
+      this.openItemData[item_id] = { data: findItemData, isOpen: true };
     },
 
     fillOpenItemData(item_id) {
