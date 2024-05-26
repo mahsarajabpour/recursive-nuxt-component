@@ -10,19 +10,18 @@
   const infoItems = ref();
   const dialog = ref(false);
 
-  const openChild = (item_id) => {
+  const openChild = (item_id, item) => {
     sidebarStore.fillOpenItemData(item_id);
   };
 
-  const openInfo = (item_id) => {
+  const openInfo = (item_id, item) => {
     dialog.value = true;
     infoItems.value = findItemById(sidebarStore.items, item_id);
-    console.log("infoItems.value", infoItems.value);
   };
 </script>
 <template>
   <div
-    class="relative top-[-76px] w-1/3 bg-white border transform transition duration-150 ease-in-out z-10 shadow-lg ring-black ring-opacity-5 focus:outline-none"
+    class="relative top-[-76px] lg:w-1/3 md:w-1/2 w-full bg-white border transform transition duration-150 ease-in-out z-10 shadow-lg ring-black ring-opacity-5 focus:outline-none"
     :class="{
       'translate-x-0 ': sidebarStore.status === 'active',
       '-translate-x-full': sidebarStore.status === 'inactive',
@@ -121,8 +120,91 @@
                 class="flex items-center justify-between border-b py-2 px-5"
               >
                 <div>
-                  {{ childItem.title }}
+                  <div class="flex items-center">
+                    {{ childItem.title }}
+                    <button @click="openInfo(childItem.id)">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-4 ml-3"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                   <div class="text-[10px]">id: {{ childItem.id }}</div>
+                </div>
+
+                <button
+                  v-if="childItem.children.length > 0"
+                  class="transition ease-in-out delay-150 hover:scale-110 duration-300"
+                  @click="openChild(childItem.id, childItem)"
+                >
+                  <svg
+                    class="-mr-1 h-5 w-5 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  v-if="
+                    sidebarStore.openItemData[childItem.id] &&
+                    sidebarStore.openItemData[childItem.id].isOpen
+                  "
+                  class="absolute shadow-xl right-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="sub-menu-button"
+                  tabindex="-1"
+                >
+                  <ul
+                    v-for="data in sidebarStore.openItemData[childItem.id].data
+                      .children"
+                    class="list-none hover:list-disc"
+                  >
+                    <li
+                      :key="data.id"
+                      class="flex items-center justify-between border-b py-2 px-5"
+                    >
+                      <div>
+                        {{ data.title }}
+                        <div class="text-[10px]">id: {{ data.id }}</div>
+                      </div>
+
+                      <button
+                        v-if="data.children.length > 0"
+                        class="transition ease-in-out delay-150 hover:scale-110 duration-300"
+                      >
+                        <svg
+                          class="-mr-1 h-5 w-5 text-gray-400"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </li>
             </ul>
@@ -131,6 +213,8 @@
       </ul>
     </div>
   </div>
+
+  <!--  dialog-->
   <custom-dialog
     :dialog
     :items="infoItems"
