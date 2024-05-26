@@ -26,10 +26,15 @@ export const useSidebarStore = defineStore("sidebar", {
     },
 
     fillOpenItemData(item_id) {
-      const data = this.items.filter(
-        (sidebarItem) => sidebarItem.id === item_id
-      );
-      this.addSpecificIndexDataToOpenItemData(item_id, data);
+      if (this.openItemData[item_id] === undefined) {
+        const data = this.items.filter(
+          (sidebarItem) =>
+            sidebarItem.id === item_id && sidebarItem.children.length > 0
+        )[0];
+        this.addSpecificIndexDataToOpenItemData(item_id, data.children);
+      } else {
+        return this.openItemData[item_id].children;
+      }
     },
   },
 });

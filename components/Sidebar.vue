@@ -46,7 +46,11 @@
         class="list-none hover:list-disc"
       >
         <li class="flex items-center justify-between border-b py-2 px-5">
-          {{ item.id }}
+          <div>
+            {{ item.name }}
+            <div class="text-[10px]">id: {{ item.id }}</div>
+          </div>
+
           <button
             v-if="item.children.length > 0"
             class="transition ease-in-out delay-150 hover:scale-110 duration-300"
@@ -70,13 +74,26 @@
               sidebarStore.openItemData[item.id] &&
               sidebarStore.openItemData[item.id].isOpen
             "
-            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="absolute shadow-xl right-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
             tabindex="-1"
           >
-            {{ item.id }}
+            <ul
+              v-for="childItem in sidebarStore.openItemData[item.id].data"
+              class="list-none hover:list-disc"
+            >
+              <li
+                :key="childItem.id"
+                class="flex items-center justify-between border-b py-2 px-5"
+              >
+                <div>
+                  {{ childItem.name }}
+                  <div class="text-[10px]">id: {{ childItem.id }}</div>
+                </div>
+              </li>
+            </ul>
           </div>
         </li>
       </ul>
