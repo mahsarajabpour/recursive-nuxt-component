@@ -11,9 +11,11 @@
     class="dashboard"
   >
     <navbar />
-    <sidebar />
-    <div class="p-4 h-full">
-      <slot class="content" />
+    <div class="relative">
+      <sidebar />
+      <div class="p-4 h-full absolute inset-0">
+        <slot class="content" />
+      </div>
     </div>
   </div>
 </template>

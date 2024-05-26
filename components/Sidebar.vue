@@ -5,10 +5,13 @@
 </script>
 <template>
   <div
-    v-if="sidebarStore.status === 'active'"
-    class="relative top-[-76px] w-1/3 bg-white border"
+    class="relative top-[-76px] w-1/3 bg-white border transform transition duration-150 ease-in-out z-10"
+    :class="{
+      'translate-x-0 ': sidebarStore.status === 'active',
+      '-translate-x-full': sidebarStore.status === 'inactive',
+    }"
   >
-    <div class="flex items-center p-2 bg-gray-200">
+    <div class="flex items-center p-2 bg-gray-200 h-[75px]">
       <div class="mr-auto text-2xl">Sidebar items</div>
       <button @click="sidebarStore.status = 'inactive'">
         <svg
