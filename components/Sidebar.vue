@@ -47,7 +47,7 @@
       >
         <li class="flex items-center justify-between border-b py-2 px-5">
           <div>
-            {{ item.name }}
+            {{ item.title }}
             <div class="text-[10px]">id: {{ item.id }}</div>
           </div>
 
@@ -89,7 +89,7 @@
                 class="flex items-center justify-between border-b py-2 px-5"
               >
                 <div>
-                  {{ childItem.name }}
+                  {{ childItem.title }}
                   <div class="text-[10px]">id: {{ childItem.id }}</div>
                 </div>
               </li>

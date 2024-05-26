@@ -33,7 +33,10 @@ export const useSidebarStore = defineStore("sidebar", {
         )[0];
         this.addSpecificIndexDataToOpenItemData(item_id, data.children);
       } else {
-        return this.openItemData[item_id].children;
+        return this.addSpecificIndexDataToOpenItemData(
+          item_id,
+          this.openItemData[item_id].data
+        );
       }
     },
   },
