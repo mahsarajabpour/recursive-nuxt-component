@@ -133,6 +133,7 @@
   </div>
   <custom-dialog
     :dialog
+    :items="infoItems"
     @update:dialog="(val) => (dialog = val)"
   />
 </template>
