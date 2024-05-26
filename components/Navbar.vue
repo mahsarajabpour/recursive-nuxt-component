@@ -26,7 +26,10 @@
 <template>
   <div class="flex items-center border-b h-[75px] px-4">
     <p class="text-4xl font-bold mr-10">Nuxi</p>
-    <button @click="closeSidebar()">
+    <button
+      class="transition ease-in-out delay-150 hover:scale-110 duration-300"
+      @click="closeSidebar()"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
