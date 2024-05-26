@@ -12,20 +12,24 @@
     }"
   >
     <div class="flex items-center p-2 bg-gray-200 h-[75px]">
-      <div class="mr-auto text-2xl">Sidebar items</div>
-      <button @click="sidebarStore.status = 'inactive'">
+      <div class="mr-auto text-2xl text-gray-700">Sidebar items</div>
+      <button
+        @click="sidebarStore.status = 'inactive'"
+        class="bg-gray-200"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-12 ml-auto"
+          color="#374151"
+          class="size-8"
         >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            d="M6 18 18 6M6 6l12 12"
           />
         </svg>
       </button>
