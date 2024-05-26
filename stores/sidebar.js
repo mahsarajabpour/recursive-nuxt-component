@@ -4,7 +4,7 @@ export const useSidebarStore = defineStore("sidebar", {
   state: () => {
     return {
       status: "inactive",
-      items: [],
+      items: {},
     };
   },
   actions: {
@@ -13,7 +13,7 @@ export const useSidebarStore = defineStore("sidebar", {
     },
 
     saveSidebarItems(payload) {
-      this.items = [];
+      this.items = {};
       this.items = payload;
     },
   },

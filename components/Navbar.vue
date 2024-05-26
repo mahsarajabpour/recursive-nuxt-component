@@ -12,13 +12,13 @@
     appConfig.endpoints.SIDEBAR_ITEMS
   );
 
-  const afterFetch = (data) => {
-    sidebarStore.saveSidebarItems(data.value);
+  const fillSidebarItems = (data) => {
+    sidebarStore.saveSidebarItems(data);
   };
 
   watchEffect(() => {
     if (!pending.value && !error.value) {
-      afterFetch(data.value);
+      fillSidebarItems(data.value);
     }
   });
 </script>
