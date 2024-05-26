@@ -8,12 +8,12 @@
 <template>
   <div
     id="dashboard-layout"
-    class="dashboard"
+    class="dashboard flex flex-col min-h-screen"
   >
     <navbar />
-    <div class="relative">
+    <div class="flex-grow relative">
       <sidebar />
-      <div class="p-4 h-full absolute inset-0">
+      <div class="p-4 absolute inset-0 overflow-auto">
         <slot class="content" />
       </div>
     </div>
@@ -25,6 +25,10 @@
     background-image: url("assets/images/background-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    background-attachment: fixed;
+  }
+
+  .content {
+    min-height: 100vh;
   }
 </style>
