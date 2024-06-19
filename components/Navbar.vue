@@ -2,24 +2,246 @@
   import { useSidebarStore } from "~/stores/sidebar";
 
   const sidebarStore = useSidebarStore();
-  const appConfig = useAppConfig();
 
   const closeSidebar = () => {
     sidebarStore.changeStatus();
   };
 
-  const { data, pending, error } = await useFetch(
-    appConfig.endpoints.SIDEBAR_ITEMS
-  );
+  const data = [
+    {
+      id: "1",
+      name: "Parent Item A",
+      slug: "parent-item-a",
+      title: "Parent Item A",
+      description: "This is the description for Parent Item A.",
+      icon: "https://www.iconfinder.com/icons/9042870/download/png/16",
+      children: [
+        {
+          id: "2",
+          name: "Child Item A-1",
+          slug: "child-item-a-1",
+          title: "Child Item A-1",
+          description: "This is the description for Child Item A-1.",
+          icon: "https://www.iconfinder.com/icons/9042871/download/png/16",
+          children: [
+            {
+              id: "3",
+              name: "Sub Child Item A-1-1",
+              slug: "sub-child-item-a-1-1",
+              title: "Sub Child Item A-1-1",
+              description: "This is the description for Sub Child Item A-1-1.",
+              icon: "https://www.iconfinder.com/icons/9042872/download/png/16",
+              children: [],
+            },
+            {
+              id: "4",
+              name: "Sub Child Item A-1-2",
+              slug: "sub-child-item-a-1-2",
+              title: "Sub Child Item A-1-2",
+              description: "This is the description for Sub Child Item A-1-2.",
+              icon: "https://www.iconfinder.com/icons/9042873/download/png/16",
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "5",
+          name: "Child Item A-2",
+          slug: "child-item-a-2",
+          title: "Child Item A-2",
+          description: "This is the description for Child Item A-2.",
+          icon: "https://www.iconfinder.com/icons/9042874/download/png/16",
+          children: [],
+        },
+      ],
+    },
+    {
+      id: "6",
+      name: "Parent Item B",
+      slug: "parent-item-b",
+      title: "Parent Item B",
+      description: "This is the description for Parent Item B.",
+      icon: "https://www.iconfinder.com/icons/9042875/download/png/16",
+      children: [
+        {
+          id: "7",
+          name: "Child Item B-1",
+          slug: "child-item-b-1",
+          title: "Child Item B-1",
+          description: "This is the description for Child Item B-1.",
+          icon: "https://www.iconfinder.com/icons/9042876/download/png/16",
+          children: [],
+        },
+        {
+          id: "8",
+          name: "Child Item B-2",
+          slug: "child-item-b-2",
+          title: "Child Item B-2",
+          description: "This is the description for Child Item B-2.",
+          icon: "https://www.iconfinder.com/icons/9042877/download/png/16",
+          children: [
+            {
+              id: "9",
+              name: "Sub Child Item B-2-1",
+              slug: "sub-child-item-b-2-1",
+              title: "Sub Child Item B-2-1",
+              description: "This is the description for Sub Child Item B-2-1.",
+              icon: "https://www.iconfinder.com/icons/9042878/download/png/16",
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "10",
+      name: "Parent Item C",
+      slug: "parent-item-c",
+      title: "Parent Item C",
+      description: "This is the description for Parent Item C.",
+      icon: "https://www.iconfinder.com/icons/9042879/download/png/16",
+      children: [
+        {
+          id: "11",
+          name: "Child Item C-1",
+          slug: "child-item-c-1",
+          title: "Child Item C-1",
+          description: "This is the description for Child Item C-1.",
+          icon: "https://www.iconfinder.com/icons/9042880/download/png/16",
+          children: [
+            {
+              id: "12",
+              name: "Sub Child Item C-1-1",
+              slug: "sub-child-item-c-1-1",
+              title: "Sub Child Item C-1-1",
+              description: "This is the description for Sub Child Item C-1-1.",
+              icon: "https://www.iconfinder.com/icons/9042881/download/png/16",
+              children: [],
+            },
+          ],
+        },
+        {
+          id: "13",
+          name: "Child Item C-2",
+          slug: "child-item-c-2",
+          title: "Child Item C-2",
+          description: "This is the description for Child Item C-2.",
+          icon: "https://www.iconfinder.com/icons/9042882/download/png/16",
+          children: [
+            {
+              id: "14",
+              name: "Sub Child Item C-2-1",
+              slug: "sub-child-item-c-2-1",
+              title: "Sub Child Item C-2-1",
+              description: "This is the description for Sub Child Item C-2-1.",
+              icon: "https://www.iconfinder.com/icons/9042883/download/png/16",
+              children: [
+                {
+                  id: "15",
+                  name: "Sub Sub Child Item C-2-1-1",
+                  slug: "sub-sub-child-item-c-2-1-1",
+                  title: "Sub Sub Child Item C-2-1-1",
+                  description:
+                    "This is the description for Sub Sub Child Item C-2-1-1.",
+                  icon: "https://www.iconfinder.com/icons/9042884/download/png/16",
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "16",
+      name: "Parent Item D",
+      slug: "parent-item-d",
+      title: "Parent Item D",
+      description: "This is the description for Parent Item D.",
+      icon: "https://www.iconfinder.com/icons/9042885/download/png/16",
+      children: [],
+    },
+    {
+      id: "17",
+      name: "Parent Item E",
+      slug: "parent-item-e",
+      title: "Parent Item E",
+      description: "This is the description for Parent Item E.",
+      icon: "https://www.iconfinder.com/icons/9042886/download/png/16",
+      children: [],
+    },
+    {
+      id: "18",
+      name: "Parent Item F",
+      slug: "parent-item-f",
+      title: "Parent Item F",
+      description: "This is the description for Parent Item F.",
+      icon: "https://www.iconfinder.com/icons/9042887/download/png/16",
+      children: [],
+    },
+    {
+      id: "19",
+      name: "Parent Item G",
+      slug: "parent-item-g",
+      title: "Parent Item G",
+      description: "This is the description for Parent Item G.",
+      icon: "https://www.iconfinder.com/icons/9042888/download/png/16",
+      children: [
+        {
+          id: "23",
+          name: "Child Item G-1",
+          slug: "child-item-g-1",
+          title: "Child Item G-1",
+          description: "This is the description for Child Item G-1.",
+          icon: "https://www.iconfinder.com/icons/9042892/download/png/16",
+          children: [],
+        },
+        {
+          id: "24",
+          name: "Child Item G-2",
+          slug: "child-item-g-2",
+          title: "Child Item G-2",
+          description: "This is the description for Child Item G-2.",
+          icon: "https://www.iconfinder.com/icons/9042893/download/png/16",
+          children: [],
+        },
+      ],
+    },
+    {
+      id: "20",
+      name: "Parent Item H",
+      slug: "parent-item-h",
+      title: "Parent Item H",
+      description: "This is the description for Parent Item H.",
+      icon: "https://www.iconfinder.com/icons/9042889/download/png/16",
+      children: [],
+    },
+    {
+      id: "21",
+      name: "Parent Item I",
+      slug: "parent-item-i",
+      title: "Parent Item I",
+      description: "This is the description for Parent Item I.",
+      icon: "https://www.iconfinder.com/icons/9042890/download/png/16",
+      children: [],
+    },
+    {
+      id: "22",
+      name: "Parent Item J",
+      slug: "parent-item-j",
+      title: "Parent Item J",
+      description: "This is the description for Parent Item J.",
+      icon: "https://www.iconfinder.com/icons/9042891/download/png/16",
+      children: [],
+    },
+  ];
 
   const fillSidebarItems = (data) => {
     sidebarStore.saveSidebarItems(data);
   };
 
-  watchEffect(() => {
-    if (!pending.value && !error.value) {
-      fillSidebarItems(data.value);
-    }
+  onMounted(() => {
+    fillSidebarItems(data);
   });
 </script>
 
